@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <section>
+    <h2>Hello from Dialog A!</h2>
+
+    <table class="table table-hover">
+      <thead>
+        <th>Title</th>
+        <th>Author</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in data.books" ng-click="setSelectedRow($index)" ng-class="{'active': selectedRow == $index}">
+          <td>{{item.title}}</td>
+          <td>{{item.author}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button ng-click="add()" class="btn btn-default">Add book</button>
+
+    <button ng-hide="selectedRow === null" ng-click="edit()" class="btn btn-default">Edit book</button>
+
+  </section>
+</body>
+</html>

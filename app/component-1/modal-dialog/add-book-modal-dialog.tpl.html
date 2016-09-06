@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Edit book</h3>
+    </div>
+    <div class="modal-body">
+      <form name="addBook.form">
+        <td>Title: {{data.addBook.title}}
+          <div class="form-group" ng-class="{'has-error bg-danger': addBook.form.title.$invalid}">
+            <input name="title"  class="form-control" ng-required="true" type="text" ng-model="data.newBook.title"/>
+          </div
+        </td>
+        <td>Author: {{data.addBook.author}}
+          <div class="form-group" ng-class="{'has-error bg-danger': addBook.form.author.$invalid}">
+            <input name="author"  class="form-control" ng-required="true" type="text" ng-model="data.newBook.author" />
+          </div
+        </td>
+        <td>Year: {{data.newBook.year}}
+            <datepicker ng-model="dt" min-mode="year" max-date="dt" datepicker-mode="'year'" ng-click="setYear()"/>
+        </td>
+        <td>Genre: {{data.addBook.genre}}
+          <div class="form-group" ng-class="{'has-error bg-danger': addBook.form.genre.$invalid}">
+            <input name="genre"  class="form-control" ng-required="true" type="text" ng-model="data.newBook.genre" />
+          </div
+        </td>
+      </form>
+    </div>
+
+    <div class="modal-footer ">
+        <button class="btn btn-primary" ng-click="addBook.form.$valid && save()">Save</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
+</body>
+</html>
