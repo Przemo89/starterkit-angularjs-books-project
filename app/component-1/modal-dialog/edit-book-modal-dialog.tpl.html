@@ -21,8 +21,8 @@
             <input name="author"  class="form-control" ng-required="true" type="text" ng-model="data.selectedBook.author" />
           </div
         </td>
-        <td>Year: {{data.selectedBook.year}}
-            <datepicker ng-model="dt" min-mode="year" max-date="maxDate" datepicker-mode="'year'" ng-click="setYear()"/>
+        <td>Year: {{getSelectedDataYear()}}
+            <datepicker ng-model="dt" min-mode="year" max-date="maxDate" datepicker-mode="'year'" />
         </td>
         <td>Genre: {{data.selectedBook.genre}}
           <div class="form-group" ng-class="{'has-error bg-danger': editBook.form.genre.$invalid}">

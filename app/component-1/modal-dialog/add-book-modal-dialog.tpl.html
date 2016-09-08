@@ -7,7 +7,7 @@
 <body>
 <div class="modal-content">
     <div class="modal-header">
-        <h3 class="modal-title">Edit book</h3>
+        <h3 class="modal-title">Add book</h3>
     </div>
     <div class="modal-body">
       <form name="addBook.form">
@@ -21,8 +21,8 @@
             <input name="author"  class="form-control" ng-required="true" type="text" ng-model="data.newBook.author" />
           </div
         </td>
-        <td>Year: {{data.newBook.year}}
-            <datepicker ng-model="dt" min-mode="year" max-date="dt" datepicker-mode="'year'" ng-click="setYear()"/>
+        <td>Year: {{getSelectedDataYear()}}
+            <datepicker ng-model="dt" min-mode="year" max-date="currentYear" datepicker-mode="'year'" />
         </td>
         <td>Genre: {{data.addBook.genre}}
           <div class="form-group" ng-class="{'has-error bg-danger': addBook.form.genre.$invalid}">

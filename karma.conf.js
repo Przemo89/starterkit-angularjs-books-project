@@ -1,91 +1,68 @@
 // Karma configuration
-// http://karma-runner.github.io/0.12/config/configuration-file.html
-// Generated on 2014-06-09 using
-// generator-karma 0.8.2
+// Generated on Thu Sep 08 2016 13:54:27 GMT+0200 (W. Europe Daylight Time)
 
-module.exports = function (config) {
-    'use strict';
-    //merge libraries configured by bower, application sources, and specs
-    var libs = require('wiredep')({
-        devDependencies: true
-    }).js, _ = require('lodash'), pathsConf = require('./gulp/lib/config-factory.js')(require('./config.json'));
+module.exports = function(config) {
+  config.set({
 
-    var coverageConfig = {
-        plugins: [
-            'karma-phantomjs-launcher', 'karma-chrome-launcher', 'karma-junit-reporter', 'karma-jasmine', 'karma-coverage'
-        ],
-        // coverage reporter generates the coverage
-        reporters: ['progress', 'coverage', 'junit'],
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    basePath: '',
 
-        preprocessors: {},
 
-        // optionally, configure the reporter
-        coverageReporter: {
-            type: 'lcov',
-            dir: pathsConf.paths.testOutput + '/coverage',
-            subdir: '/'
-        }
-    };
-    coverageConfig.preprocessors[pathsConf.paths.src + '/**/!(*spec|*mock).js'] = ['coverage'];
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: ['jasmine'],
 
-    var karmaDefaultConfig = {
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
 
-        // base path, that will be used to resolve files and exclude
-        basePath: '.',
+    // list of files / patterns to load in the browser
+    files: [
+    ],
 
-        // testing framework to use (jasmine/mocha/qunit/...)
-        frameworks: ['jasmine'],
 
-        // list of files / patterns to load in the browser
-        files: _.flatten([libs, pathsConf.scripts.src(), pathsConf.scripts.testSrc()]),
+    // list of files to exclude
+    exclude: [
+    ],
 
-        // list of files / patterns to exclude
-        exclude: [],
 
-        // web server port
-        port: 7777,
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+    },
 
-        // Start these browsers, currently available:
-        // - Chrome
-        // - ChromeCanary
-        // - Firefox
-        // - Opera
-        // - Safari (only Mac)
-        // - PhantomJS
-        // - IE (only Windows)
-        browsers: [
-            'PhantomJS'
-        ],
 
-        // Which plugins to enable
-        plugins: [
-            'karma-phantomjs-launcher', 'karma-chrome-launcher', 'karma-junit-reporter', 'karma-jasmine'
-        ],
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    reporters: ['progress'],
 
-        // Continuous Integration mode
-        // if true, it capture browsers, run tests and exit
-        singleRun: false,
 
-        colors: true,
+    // web server port
+    port: 9876,
 
-        // level of logging
-        // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-        logLevel: config.LOG_INFO,
 
-        // coverage reporter generates the coverage
-        reporters: ['progress', 'junit'],
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
 
-        // optionally, configure the reporter
-        junitReporter: {
-            outputDir: pathsConf.paths.testOutput,
-            outputFile: 'test-results.xml'
-        }
-    };
-    if (process.env.generateCoverage === 'true') {
-        config.set(_.assign(karmaDefaultConfig, coverageConfig));
-    } else {
-        config.set(karmaDefaultConfig);
-    }
-};
+
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
+
+
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
+
+
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: ['Chrome', 'PhantomJS'],
+
+
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: false,
+
+    // Concurrency level
+    // how many browser should be started simultaneous
+    concurrency: Infinity
+  })
+}

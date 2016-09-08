@@ -1,4 +1,4 @@
-angular.module('app.component1').controller('MyFirstController', function($scope, $http, $modal, books) {
+angular.module('app.component1').controller('MyFirstController', function($scope, $http, $modal, BookService) {
    'use strict';
 
    $scope.selectedRow = null;
@@ -8,7 +8,7 @@ angular.module('app.component1').controller('MyFirstController', function($scope
      books: []
    };
 
-   angular.copy(books.data, $scope.data.books);
+   $scope.data.books = BookService.getBooks();
 
    $scope.setSelectedRow = function (index) {
      $scope.selectedRow = index;
@@ -19,8 +19,8 @@ angular.module('app.component1').controller('MyFirstController', function($scope
       templateUrl: "/component-1/modal-dialog/edit-book-modal-dialog.tpl.html",
       controller: "EditBookController",
       resolve: {
-        selectedBook: function () {
-          return $scope.data.books[$scope.selectedRow];
+        idSelectedBook: function () {
+          return $scope.data.books[$scope.selectedRow].id;
         }
       }
      });
@@ -32,29 +32,24 @@ angular.module('app.component1').controller('MyFirstController', function($scope
       controller: "AddBookController",
       resolve: {
         books: function () {
-          return $scope.data.books;
+          return BookService.getBooks();
         }
       }
      });
    };
 
-}).controller('EditBookController', function($scope, $modalInstance, selectedBook){
+}).controller('EditBookController', function($scope, $modalInstance, BookService, idSelectedBook){
     'use strict';
 
-    $scope.selectedBook = selectedBook;
+    // $scope.selectedBook = selectedBook;
+    $scope.maxDate = new Date();
     $scope.data = {
-      selectedBook: {
-        id: selectedBook.id,
-        version: selectedBook.version,
-        genre: selectedBook.genre,
-        year: selectedBook.year,
-        title: selectedBook.title,
-        author: selectedBook.author
-      }
+      selectedBook: BookService.copyBook(idSelectedBook)
     };
 
     $scope.update = function (book) {
-      angular.copy($scope.data.selectedBook, selectedBook)
+      BookService.updateBook($scope.data.selectedBook.id, $scope.data.selectedBook.version, $scope.data.selectedBook.genre,
+        $scope.getSelectedDataYear(), $scope.data.selectedBook.title, $scope.data.selectedBook.author);
       $modalInstance.close('ok');
     };
 
@@ -64,39 +59,30 @@ angular.module('app.component1').controller('MyFirstController', function($scope
 
     $scope.dt = new Date($scope.data.selectedBook.year + '-01-01');
 
-    $scope.maxDate = new Date();
-
-    $scope.setYear = function () {
-      $scope.data.selectedBook.year = $scope.dt.getFullYear();
+    $scope.getSelectedDataYear = function() {
+      return $scope.dt.getFullYear();
     };
 
-}).controller('AddBookController', function($scope, $modalInstance, books){
+
+
+}).controller('AddBookController', function($scope, $modalInstance, BookService){
   'use strict';
 
-  $scope.books = books;
+  $scope.books = BookService.getBooks();
   $scope.dt = new Date();
+  $scope.currentYear = new Date();
 
-  $scope.setId = function () {
-    return $scope.books.length + 1;
-  };
   $scope.data = {
-    newBook: {
-      id: $scope.setId(),
-      version: 0,
-      genre: '',
-      year: $scope.dt.getFullYear(),
-      title: '',
-      author: ''
-    }
+    newBook: BookService.createBook()
+  };
+
+  $scope.getSelectedDataYear = function() {
+    return $scope.dt.getFullYear();
   };
 
   $scope.save = function () {
-    $scope.books.push($scope.data.newBook);
+    BookService.addBook($scope.data.newBook.version, $scope.data.newBook.genre, $scope.dt, $scope.data.newBook.title, $scope.data.newBook.author);
     $modalInstance.close('ok');
-  };
-
-  $scope.setYear = function () {
-    $scope.data.newBook.year = $scope.dt.getFullYear();
   };
 
   $scope.cancel = function () {

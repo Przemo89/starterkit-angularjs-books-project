@@ -59,11 +59,18 @@
     <select ng-model="data.books"
       ng-options="data.books.genre">
 </select> -->
+<div class="row">
+  <div class="col-xs-4">
+    Filer By
+<select class="form-control" ng-model="data.selectedGenre" ng-options="genre for genre in data.genres" ng-change="filter(data.selectedGenre)">
+   <option value="">Please select</option>
+   </select>
+  </div>
+</div>
+  <!-- <option value="0" label="Please select" />
+  <option ng-repeat="genre in data.genres" value="{{genres.le}}">{{genres.genre}}</option> -->
+  <!-- <option ng-repeat="book in data.books" value="{{book.id}}">{{book.genre}}</option> -->
 
-<select>
-  <option value="0" label="Please select" />
-  <option ng-repeat="book in data.books" value="{{book.id}}">{{book.genre}}</option>
-</select>
 <table class="table table-hover">
   <thead>
     <th>Title</th>
