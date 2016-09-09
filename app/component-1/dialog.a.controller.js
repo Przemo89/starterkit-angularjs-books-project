@@ -1,4 +1,4 @@
-angular.module('app.component1').controller('MyFirstController', function($scope, $http, $modal, BookService) {
+angular.module('app.component1').controller('DialogAController', function($scope, $modal, BookService) {
    'use strict';
 
    $scope.selectedRow = null;
@@ -47,7 +47,7 @@ angular.module('app.component1').controller('MyFirstController', function($scope
       selectedBook: BookService.copyBook(idSelectedBook)
     };
 
-    $scope.update = function (book) {
+    $scope.update = function () {
       BookService.updateBook($scope.data.selectedBook.id, $scope.data.selectedBook.version, $scope.data.selectedBook.genre,
         $scope.getSelectedDataYear(), $scope.data.selectedBook.title, $scope.data.selectedBook.author);
       $modalInstance.close('ok');
@@ -62,8 +62,6 @@ angular.module('app.component1').controller('MyFirstController', function($scope
     $scope.getSelectedDataYear = function() {
       return $scope.dt.getFullYear();
     };
-
-
 
 }).controller('AddBookController', function($scope, $modalInstance, BookService){
   'use strict';
