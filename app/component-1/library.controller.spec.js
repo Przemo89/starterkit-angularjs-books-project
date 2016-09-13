@@ -1,7 +1,7 @@
-describe('DialogAController initialization', function () {
+describe('LibraryController initialization', function () {
   'use strict'
 
-  var $scope, BookServiceMock, modal, DialogAController;
+  var $scope, BookServiceMock, modal, libraryController;
 
   BookServiceMock = {
     getBooks: function() {
@@ -29,13 +29,13 @@ describe('DialogAController initialization', function () {
     modal = {
       open: jasmine.createSpy('modal.open')
     };
-    DialogAController = $controller('DialogAController', {$scope: $scope, $modal: modal, BookService: BookServiceMock});
+    libraryController = $controller('LibraryController', {$scope: $scope, $modal: modal, BookService: BookServiceMock});
   }));
 
   describe('DialogAController tests', function() {
 
     it('should instantiate the controller properly', function () {
-         expect(DialogAController).not.toBeUndefined();
+         expect(libraryController).not.toBeUndefined();
      });
 
     it('should open edit modal with provided options', function(){

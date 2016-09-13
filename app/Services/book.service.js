@@ -126,15 +126,15 @@ angular.module('app.component1').factory('BookService', ['$http', function ($htt
         author: author
       };
       books.push(bookToAdd);
-      return $http({
-        method: "POST",
-        url: "app/index.html"
-      }).then(function successCallback(response) {
-        console.log("Success");
-      }, function errorCallback(response) {
-        console.log("Error");
-        return response.data;
-      });
+      // return $http({
+      //   method: "POST",
+      //   url: "app/index.html"
+      // }).then(function successCallback(response) {
+      //   console.log("Success");
+      // }, function errorCallback(response) {
+      //   console.log("Error");
+      //   return response.data;
+      // });
     },
 
     updateBook: function(id, version, genre, year, title, author) {

@@ -33,7 +33,7 @@
     </div>
 
     <div class="modal-footer ">
-        <button class="btn btn-primary" ng-click="editBook.form.$valid && update()">Update</button>
+        <button name="editBookButtonInModal" class="btn btn-primary" ng-disabled="editBook.form.$invalid" ng-click="update()">Update</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </div>
