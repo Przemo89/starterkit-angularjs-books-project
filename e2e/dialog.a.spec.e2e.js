@@ -1,8 +1,7 @@
 var DialogAPage = require('./po/dialog.a.page.js');
 
 describe('dialog a page tests', function () {
-  'use strict'
-  // var appURL = 'http://localhost:9000/#/component-1/dialog-a';
+  'use strict';
 
   var dialogAPage;
 
@@ -12,8 +11,8 @@ describe('dialog a page tests', function () {
 
   it('should edit book button be hidden while no row is selected in table and visible if some row is selected', function() {
       // given
-      var existingBookAuthorInTable, editBookButtonName;
-      existingBookAuthorInTable = 'Steve';
+      var numberOfRow, editBookButtonName;
+      numberOfRow = 1;
       editBookButtonName = 'editBookButton';
 
       // when
@@ -21,7 +20,7 @@ describe('dialog a page tests', function () {
 
       // then
       expect(element(by.name(editBookButtonName)).isDisplayed()).toBe(false);
-      dialogAPage.clickSpecificRowInTable(existingBookAuthorInTable);
+      dialogAPage.clickRowInTable(numberOfRow);
       expect(element(by.name(editBookButtonName)).isDisplayed()).toBe(true);
   });
 
@@ -121,7 +120,6 @@ describe('dialog a page tests', function () {
     dialogAPage.clickEditBookButtonInDialog();
     dialogAPage.editBookInModal(titleNew, authorNew, genreNew);
     dialogAPage.clickEditBookButtonInModal();
-    browser.sleep(2000);
 
     // then
     element.all(by.repeater('item in data.books')).get(numberOfModifiedRow).all(by.tagName('td')).getText().then(function(titleAndAuthorStringTable) {

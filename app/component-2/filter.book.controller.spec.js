@@ -44,26 +44,29 @@ describe('FilterBookController initialization', function () {
       expect(filterBookController).not.toBeUndefined();
      });
 
-    // it('should close modal with status "ok"', function(){
-    //      // given
-    //     var properResponseStatus = 'ok';
-    //
-    //      // when
-    //      $scope.save();
-    //
-    //      // then
-    //      expect(modalInstanceMock.close).toHaveBeenCalledWith(properResponseStatus);
-    // });
-    //
-    // it('should dismiss modal with status "cancel"', function(){
-    //      // given
-    //     var properResponseStatus = 'cancel';
-    //
-    //      // when
-    //      $scope.cancel();
-    //
-    //      // then
-    //      expect(modalInstanceMock.dismiss).toHaveBeenCalledWith(properResponseStatus);
-    // });
+    it('should $scope.isSelected be false', function() {
+      // given
+      var properResult = false;
+      $scope.data.selectedGenre = '';
+
+      // when
+      $scope.isSelectedGenre();
+
+      // then
+      expect($scope.isSelected).toBe(properResult);
+    });
+
+    it('should be used BookService.getBookByGenre() function', function() {
+      // given
+      var genreExisting = 'it';
+      spyOn(bookServiceMock, "getBooksByGenre");
+      $scope.data.selectedGenre = genreExisting;
+
+      // when
+      $scope.isSelectedGenre();
+
+      // then
+      expect(bookServiceMock.getBooksByGenre).toHaveBeenCalledWith(genreExisting);
+    })
   });
 });

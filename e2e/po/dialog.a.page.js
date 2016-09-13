@@ -15,7 +15,7 @@ var config = {
 
 function DialogAPage() {
 
-}
+};
 
 DialogAPage.prototype.open = function() {
   browser.get(config.appURL);
@@ -31,16 +31,6 @@ DialogAPage.prototype.clickEditBookButtonInDialog = function() {
 
 DialogAPage.prototype.clickRowInTable = function(rowNumber) {
   element.all(by.repeater(config.ngRepeatTable)).get(rowNumber).click();
-};
-
-DialogAPage.prototype.clickSpecificRowInTable = function(text) {
-  element.all(by.repeater(config.ngRepeatTable)).filter(function(row) {
-    return row.getText().then(function(txt) {
-      return txt.indexOf(text) !== -1;
-    });
-  }).then(function(elem) {
-    elem[0].click();
-  });
 };
 
 DialogAPage.prototype.addBookInModal = function(title, author, genre) {

@@ -126,15 +126,15 @@ angular.module('app.component1').factory('BookService', ['$http', function ($htt
         author: author
       };
       books.push(bookToAdd);
-      // return $http({
-      //   method: "POST",
-      //   url: "app/index.html"
-      // }).then(function successCallback(response) {
-      //   console.log("Success");
-      // }, function errorCallback(response) {
-      //   console.log("Error");
-      //   return response.data;
-      // });
+      return $http({
+        method: "POST",
+        url: "app/index.html"
+      }).then(function successCallback(response) {
+        console.log("Success");
+      }, function errorCallback(response) {
+        console.log("Error");
+        return response.data;
+      });
     },
 
     updateBook: function(id, version, genre, year, title, author) {
@@ -143,6 +143,15 @@ angular.module('app.component1').factory('BookService', ['$http', function ($htt
       books[id-1].year = year;
       books[id-1].title = title;
       books[id-1].author = author;
+      return $http({
+        method: "PUT",
+        url: "app/index.html"
+      }).then(function successCallback(response) {
+        console.log("Success");
+      }, function errorCallback(response) {
+        console.log("Error");
+        return response.data;
+      });
     },
 
     // new book id will be set just before adding to table books
